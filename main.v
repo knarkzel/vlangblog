@@ -7,6 +7,16 @@ struct App {
 	vweb.Context
 }
 
+struct Recipe {
+	path  string
+	title string
+	date  string
+}
+
+const recipes = {
+	'kylling-taco-grønnsaker': Recipe{'kylling-taco-grønnsaker', 'Kylling med tacokrydder og grønnsaker', '12/10/21'}
+}
+
 fn main() {
 	mut app := &App{}
 	app.handle_static('assets', true)
@@ -15,14 +25,12 @@ fn main() {
 
 ['/']
 pub fn (mut app App) index() vweb.Result {
-	mut articles := []string{}
-	articles = os.ls('articles/') or { return app.text("Articles doesn't exist") }
 	return $vweb.html()
 }
 
-['/:article]']
-pub fn (mut app App) article(article string) vweb.Result {
-	file := 'articles/' + article
-	body := os.read_file(file) or { return app.text('Article not found') }
+['/:recipe]']
+pub fn (mut app App) recipe(recipe string) vweb.Result {
+	file := "articles/" + recipes[recipe].path + ".html"
+	body := os.read_file(file) or { return app.text('Recipe not found') }
 	return app.html(body)
 }

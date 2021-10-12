@@ -1,9 +1,17 @@
-<h3>Oppskrifter for billig bodybuilding</h3>
-<img src="ripped.webp" alt="Ripped image" width=450></img>
-<ul>
-@for article in articles
-	<li>
-		<a href="/@article">@article</a>
-	</li>
-@end
-</ul>
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1">
+		<title>Billig bodybuilding</title>
+	</head>
+	<body>
+		<h3>Billig bodybuilding</h3>
+		<img src="ripped.webp" alt="Ripped image" width=350></img>
+		<ul>
+		@for _, recipe in recipes
+			<li><a href="/@recipe.path">@recipe.title</a>: @recipe.date</li>
+		@end
+		</ul>
+	</body>
+</html>
